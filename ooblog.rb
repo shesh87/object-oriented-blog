@@ -1,12 +1,12 @@
 class Blog
-	# include message
-	def front_page
-		puts "#{@message}\n------------"
+	def front_page(text)
+		@text = text
+		puts "#{text}\n-------------------------"
 	end
 end
 
 
-class Post
+class Post < Blog
 	attr_reader :title, :text, :message
 
 	def initialize(title, text)
@@ -15,35 +15,33 @@ class Post
 	end
 
 	def date
-		@time = Time.now
-		@month = @time.month
-		@date = @time.mday
-		@year = @time.year
-		return "#{@month} #{@date}, #{@year}"
+		time = Time.now
+		month = time.month
+		date = time.mday
+		year = time.year
+		return "#{month} #{date}, #{year}"
 	end
 
-	def post_message
-		@date = date()
-		@message = "#{@date}\n#{@title}\n************************\n#{@text}"
-	end
-end
-
-module message < Post
-	def send_post
-		
+	def create_post
+		date = date()
+		message = "#{date}\n#{@title}\n*************************\n#{@text}"
+		front_page(message)
 	end
 end
 
 
-blog = Blog.new
-blog.front_page
+
+
+
 
 first_post = Post.new "Day 1 of Ironhack", "Learned all about Git today."
 second_post = Post.new "Day 2 of Ironhack", "Fummabled with module Relationships."
 third_post = Post.new "Day 3 of Ironhack", "Be better than yesterday. Hehe."
-first_post.post_message
-# second_post.post_message
-# third_post.post_message
+
+# first_post.create_post
+
+blog = Blog.new
+blog.front_page()
 
 
 
