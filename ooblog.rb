@@ -9,19 +9,18 @@ class Blog
 	attr_reader :history
 	
 	def front_page(text)
-		# blog.post_history
-		@text = text
-		puts "#{text}\n-------------------------\n#{@history}"
-		# history.push(text)
+		@text = text.reverse
+		puts "#{text}\n-------------------------\n"
 	end
 	def initialize
 		@history = []
 	end
 	def add_post(post)
-		@message = post
-		@history.each do |message|
+		@history.push(post)
+		@history.reverse.each do |message|
 			front_page(message)
 		end
+		#how to run thru an array backwards? 
 	end
 end
 #receives a post and add to history
@@ -45,8 +44,6 @@ class Post
 	def create_post
 		date = date()
 		post = "\n#{date}\n#{@title}\n*************************\n#{@text}"
-		# front_page(post)
-		# @history.push(post)
 	end
 end
 
@@ -57,8 +54,8 @@ end
 # _____________________________________________________________________________________________________
 
 
-blog = Blog.new
 
+blog = Blog.new
 puts "Create Your blog Post!"
 puts "Yes or No?"
 answer = (gets.chomp).downcase
@@ -69,11 +66,13 @@ if answer == "yes"
 	puts "Write the post"
 	text = gets.chomp
 	blog_post = Post.new(title, text)
-	blog_post.create_post
-	blog.add_post()
+	new_post = blog_post.create_post
+	blog.add_post(new_post)
 
-else
+elsif answer == "no"
 	puts "Thanks for posting today!\n"
+else
+	puts "Please enter a correct answer."
 end
 
 while answer != "no"
@@ -87,10 +86,14 @@ while answer != "no"
 		puts "Write the post"
 		text = gets.chomp
 		blog_post = Post.new(title, text)
-		blog_post.create_post
-	else
+		new_post = blog_post.create_post
+		blog.add_post(new_post)
+
+	elsif answer == "no"
 		puts "Thanks for posting today!\n"
-	end	
+	else
+		puts "Please enter a correct answer."
+	end
 end
 
 
