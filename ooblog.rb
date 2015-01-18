@@ -35,19 +35,19 @@ class Post
 
 	def date
 		time = Time.now
-		month = time.month
-		date = time.mday
-		year = time.year
-		return "#{month} #{date}, #{year}"
+		return time.strftime("%A %B %d, %Y")
 	end
 
 	def create_post
 		date = date()
 		post = "\n#{date}\n#{@title}\n*************************\n#{@text}"
 	end
+
+	# def date
+	# 	d = Date.now
+	# 	puts "#{d}"
+	# end
 end
-
-
 
 
 
@@ -99,8 +99,10 @@ end
 
 
 
-# first_post = Post.new "Day 1 of Ironhack", "Learned all about Git today."
-# second_post = Post.new "Day 2 of Ironhack", "Fummabled with module Relationships."
-# third_post = Post.new "Day 3 of Ironhack", "Be better than yesterday. Hehe."
+
+
+first_post = Post.new "Day 1 of Ironhack", "Learned all about Git today."
+second_post = Post.new "Day 2 of Ironhack", "Fummabled with module Relationships."
+third_post = Post.new "Day 3 of Ironhack", "Be better than yesterday. Hehe."
 
 
